@@ -1,21 +1,27 @@
 import React, { Component } from "react";
-import logo from "../../img/logo.svg";
+import { connect } from "react-redux";
 import "../../css/App.css";
+
+import User from "./User.js";
+import Page from "./Page.js";
 
 class App extends Component {
     render() {
+        const { user, page } = this.props;
         return (
-            <div className="App">
-                <div className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h2>Welcome to React</h2>
-                </div>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to reload.
-                </p>
+            <div className="app">
+                <User name={user.name} />
+                <Page year={page.year} photos={page.photos} />
             </div>
         );
     }
 }
 
-export default App;
+function mapStateToProps(state) {
+    return {
+        user: state.user,
+        page: state.page
+    };
+}
+
+export default connect(mapStateToProps)(App);
