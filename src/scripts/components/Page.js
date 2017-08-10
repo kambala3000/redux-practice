@@ -14,7 +14,7 @@ class Page extends Component {
     render() {
         const { year, photos } = this.props;
         return (
-            <div>
+            <div className="ib page">
                 <div className="buttons-wrap">
                     <button className="btn-year" onClick={this.onYearClick}>
                         2015
