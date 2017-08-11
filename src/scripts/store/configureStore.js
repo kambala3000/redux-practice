@@ -1,13 +1,14 @@
 import { createStore, applyMiddleware, compose } from "redux";
+import { createLogger } from "redux-logger";
 import rootReducer from "../reducers/rootReducer";
-import { ping } from "../enhancers/ping";
 
 export default function configureStore(initialState) {
+    const logger = createLogger();
     const store = createStore(
         rootReducer,
         initialState,
         compose(
-            applyMiddleware(ping),
+            applyMiddleware(logger),
             window.devToolsExtension ? window.devToolsExtension() : f => f
         )
     );
