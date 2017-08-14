@@ -11,10 +11,15 @@ class App extends Component {
     render() {
         console.log(this.props);
         const { user, page } = this.props;
-        const { setYear } = this.props.pageActions;
+        const { getPhotos } = this.props.pageActions;
         return (
             <div className="row">
-                <Page year={page.year} photos={page.photos} setYear={setYear} />
+                <Page
+                    year={page.year}
+                    photos={page.photos}
+                    fetching={page.fetching}
+                    getPhotos={getPhotos}
+                />
                 <User name={user.name} />
             </div>
         );

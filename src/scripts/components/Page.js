@@ -8,11 +8,23 @@ class Page extends Component {
     }
 
     onYearClick(e) {
-        this.props.setYear(+e.target.textContent);
+        this.props.getPhotos(+e.target.textContent);
+    }
+
+    renderPhotos() {
+        const { photos, fetching } = this.props;
+        if (fetching) {
+            return <p>Загрузка...</p>;
+        }
+        return (
+            <p>
+                You have {photos.length} photos.
+            </p>
+        );
     }
 
     render() {
-        const { year, photos } = this.props;
+        const { year } = this.props;
         return (
             <div className="ib page">
                 <div className="buttons-wrap">
@@ -29,9 +41,7 @@ class Page extends Component {
                 <h3 className="year-now">
                     {year} year
                 </h3>
-                <p>
-                    You have {photos.length} photos.
-                </p>
+                {this.renderPhotos.call(this)}
             </div>
         );
     }
@@ -40,7 +50,8 @@ class Page extends Component {
 Page.propTypes = {
     year: PropTypes.number.isRequired,
     photos: PropTypes.array.isRequired,
-    setYear: PropTypes.func.isRequired
+    fetching: PropTypes.bool.isRequired,
+    getPhotos: PropTypes.func.isRequired
 };
 
 export default Page;
